@@ -1,4 +1,5 @@
 #OS Commands To Be Familiar With Unix
+
 #VI
 arrow keys - moves the "cursor" location up/down , left/right
 i for insert
@@ -51,7 +52,37 @@ grep -i smtp /var/log/zimbra.log | grep -ioE 'to=.*status=.*[ \t] ' | head -5
  to=<admin@mail-172.example.com>, relay=127.0.0.1[127.0.0.1]:10026, delay=2.3, delays=0.07/0.1/0.27/1.9, dsn=2.0.0, status=sent  
  to=<admin@mail-172.example.com>, relay=127.0.0.1[127.0.0.1]:10032, delay=1.5, delays=0.24/0.02/0.02/1.2, dsn=2.0.0, status=sent 
  to=<admin@mail-172.example.com>, relay=127.0.0.1[127.0.0.1]:10026, delay=7.9, delays=0.3/0.03/2.3/5.3, dsn=2.0.0, status=sent
-zgrep -i "triggers filter" /var/log/zimbra.* | grep -ioE 'from=.*to=.*>[ \t]' | grep example | uniq
+
+
+ zgrep -i "triggers filter" /var/log/zimbra.* | grep -ioE 'from=.*to=.*>[ \t]' | grep example | uniq
  from=<admin@mail-172.example.com> to=<admin@mail-172.example.com> 
  from=<user1@mail-172.example.com> to=<admin@mail-172.example.com> 
  from=<admin@mail-172.example.com> to=<admin@mail-172.example.com>
+
+#Zgrep
+#You can use all the options above in grep with zgrep .
+
+zgrep -i fatal mailbox.log.*.gz
+zgrep -iEv -C3 'info|warn' mailbox.log.*.gz
+
+#Head
+
+#Useful, for example, when you want to see how a long file formats date/time to use later for your grep:
+
+head mailbox.log
+
+#Tail
+#If you wanted to monitor multiple files at once in 'real time' . Note, you could also pipe the output to grep also :
+
+tail -f mailbox.log -f trace_log.2015_03_11 -f access_log.2015-03-11 -f sync.log -f ews.log
+tail -f mailbox.log -f trace_log.2015_03_11 -f access_log.2015-03-11 -f sync.log -f ews.log | grep -i user1
+
+#Less
+less +F /opt/zimbra/log/mailbox.log
+
+#wc - Word Count
+
+#uniq - Unique
+
+#sort
+
